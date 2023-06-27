@@ -682,7 +682,7 @@ RCT_REMAP_METHOD(logout,
 }
 
 + (instancetype)CustomBrowserEdge {
-  OKTCustomBrowserURLTransformation transform = [[self class] URLTransformationSchemeSubstitutionHTTPS:@"microsoft-edge" HTTP:@"microsoft-edge"];
+  OKTCustomBrowserURLTransformation transform = [[self class] URLTransformationSchemeSubstitutionHTTPS:@"microsoft-edge-https" HTTP:@"microsoft-edge-http"];
   NSURL *appStoreURL =
   [NSURL URLWithString:@"itms-apps://itunes.apple.com/gb/app/microsoft-edge-web-browser/id1288723196"];
   return [[[self class] alloc] initWithURLTransformation:transform
