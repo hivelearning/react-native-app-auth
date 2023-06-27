@@ -681,6 +681,15 @@ RCT_REMAP_METHOD(logout,
     return defaultCode;
 }
 
++ (instancetype)CustomBrowserEdge {
+  OKTCustomBrowserURLTransformation transform = [[self class] URLTransformationSchemeSubstitutionHTTPS:@"microsoft-edge" HTTP:@"microsoft-edge"];
+  NSURL *appStoreURL =
+  [NSURL URLWithString:@"itms-apps://itunes.apple.com/gb/app/microsoft-edge-web-browser/id1288723196"];
+  return [[[self class] alloc] initWithURLTransformation:transform
+                                        canOpenURLScheme:@"microsoft-edge"
+                                             appStoreURL:appStoreURL];
+}
+
 - (id<OIDExternalUserAgent>)getCustomBrowser: (NSString *) browserType {
     typedef id<OIDExternalUserAgent> (^BrowserBlock)(void);
     
@@ -700,7 +709,11 @@ RCT_REMAP_METHOD(logout,
         @"firefox":
             ^{
                 return [OIDExternalUserAgentIOSCustomBrowser CustomBrowserFirefox];
-            }
+            },
+        @"edge":
+            ^{
+                return [OIDExternalUserAgentIOSCustomBrowser CustomBrowserEdge];
+            },
     };
     BrowserBlock browser = browsers[browserType];
     return browser();
